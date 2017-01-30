@@ -33,7 +33,8 @@ apt-get install -y --force-yes \
 	php-zip \
 	php-mysql \
 	php-mbstring \
-	php7.0-bcmath
+	php7.0-bcmath \
+	php7.0-sqlite
 
 a2enmod rewrite
 

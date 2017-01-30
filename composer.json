@@ -27,7 +27,8 @@
 		"kdyby/github": "dev-master#bf9d070efdc0a4a1cb064d2a90597e9392c48b96",
 		"kdyby/monolog": "^1.2",
 		"kdyby/clock": "^0.4.0",
-		"kdyby/rabbitmq": "dev-master#76ed30a080803b2e0b350bc34207760d36fb2a0f"
+		"kdyby/rabbitmq": "dev-master#76ed30a080803b2e0b350bc34207760d36fb2a0f",
+        "dg/adminer-custom": "^1.8"
 	},
 	"require-dev": {
 		"nette/tester": "1.7.*"
