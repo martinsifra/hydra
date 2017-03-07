@@ -31,10 +31,11 @@ extensions:
 
 doctrine:
 	user: root
-	password: pdp7
-	dbname: pdp7
+	password: hydra
+	dbname: hydra
 	metadata:
 		App: %appDir%
+	classMetadataFactory: App\Model\ClassMetadataFactory
 	targetEntityMappings:
 		App\Entities\Product\IProduct: App\Entities\Product\Nay
 

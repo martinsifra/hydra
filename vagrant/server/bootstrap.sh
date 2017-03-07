@@ -9,8 +9,8 @@ apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb9
 add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://mirror.vpsfree.cz/mariadb/repo/5.5/ubuntu trusty main'
 
 export DEBIAN_FRONTEND=noninteractive
-debconf-set-selections <<< 'mariadb-server-5.5 mysql-server/root_password password pdp7'
-debconf-set-selections <<< 'mariadb-server-5.5 mysql-server/root_password_again password pdp7'
+debconf-set-selections <<< 'mariadb-server-5.5 mysql-server/root_password password hydra'
+debconf-set-selections <<< 'mariadb-server-5.5 mysql-server/root_password_again password hydra'
 
 echo "deb http://www.rabbitmq.com/debian/ testing main" > /etc/apt/sources.list.d/rabbitmq.list
 wget https://www.rabbitmq.com/rabbitmq-signing-key-public.asc -q -O - | apt-key add -
@@ -49,26 +49,26 @@ fi
 
 rm -rf /etc/apache2/sites-enabled/*
 if ! [ -L "/etc/apache2/sites-available" ]; then
-	if ! [ -L "/etc/apache2/sites-available/pdp7.conf" ]; then
-		ln -s "/vagrant/vagrant/server/apache/sites-available/pdp7.conf" "/etc/apache2/sites-available/pdp7.conf"
+	if ! [ -L "/etc/apache2/sites-available/hydra.conf" ]; then
+		ln -s "/vagrant/vagrant/server/apache/sites-available/hydra.conf" "/etc/apache2/sites-available/hydra.conf"
 	fi
-	a2ensite -q pdp7.conf
+	a2ensite -q hydra.conf
 fi
 
-if ! [ -L "/etc/apache2/conf-available/pdp7.conf" ]; then
-	rm -f "/etc/apache2/conf-available/pdp7.conf"
-	ln -s "/vagrant/vagrant/server/apache/conf-available/pdp7.conf" "/etc/apache2/conf-available/pdp7.conf"
+if ! [ -L "/etc/apache2/conf-available/hydra.conf" ]; then
+	rm -f "/etc/apache2/conf-available/hydra.conf"
+	ln -s "/vagrant/vagrant/server/apache/conf-available/hydra.conf" "/etc/apache2/conf-available/hydra.conf"
 fi
-a2enconf -q pdp7.conf
+a2enconf -q hydra.conf
 
-if ! [ -L "/etc/php/7.0/cli/conf.d/pdp7.ini" ]; then
-	rm -f "/etc/php/7.0/cli/conf.d/pdp7.ini"
-	ln -s "/vagrant/vagrant/server/php/cli.ini" "/etc/php/7.0/cli/conf.d/pdp7.ini"
+if ! [ -L "/etc/php/7.0/cli/conf.d/hydra.ini" ]; then
+	rm -f "/etc/php/7.0/cli/conf.d/hydra.ini"
+	ln -s "/vagrant/vagrant/server/php/cli.ini" "/etc/php/7.0/cli/conf.d/hydra.ini"
 fi
 
-if ! [ -L "/etc/php/7.0/apache2/conf.d/pdp7.ini" ]; then
-	rm -f "/etc/php/7.0/apache2/conf.d/pdp7.ini"
-	ln -s "/vagrant/vagrant/server/php/apache2.ini" "/etc/php/7.0/apache2/conf.d/pdp7.ini"
+if ! [ -L "/etc/php/7.0/apache2/conf.d/hydra.ini" ]; then
+	rm -f "/etc/php/7.0/apache2/conf.d/hydra.ini"
+	ln -s "/vagrant/vagrant/server/php/apache2.ini" "/etc/php/7.0/apache2/conf.d/hydra.ini"
 fi
 
 if [ -f "/etc/php/7.0/mods-available/xdebug.ini" ]; then
@@ -79,8 +79,8 @@ fi
 chmod -R 0777 "/vagrant/temp" "/vagrant/log"
 
 
-mysql --user=root --password="pdp7" --execute="CREATE DATABASE IF NOT EXISTS pdp7";
-mysql --user=root --password="pdp7" --execute="GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'pdp7';"
+mysql --user=root --password="hydra" --execute="CREATE DATABASE IF NOT EXISTS hydra";
+mysql --user=root --password="hydra" --execute="GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'hydra';"
 sed -ie "s/^bind-address/#bind-address/g" "/etc/mysql/my.cnf"
 service mysql restart
 
