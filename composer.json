@@ -35,9 +35,12 @@
 	},
 	"minimum-stability": "stable",
 	"autoload": {
-		"psr-4": {
-			"PDP\\": "app",
-			"PDPTests\\": "tests"
+        "classmap": [
+          "app/"
+        ],
+		"psr-0": {
+			"App\\": "src/",
+			"Pd\\": "src/"
 		}
 	}
 }

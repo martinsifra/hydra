@@ -34,10 +34,12 @@ doctrine:
 	password: hydra
 	dbname: hydra
 	metadata:
-		App: %appDir%
+		App: %appDir%/../src/App
+		Pd: %appDir%/../src/Pd
 	classMetadataFactory: App\Model\ClassMetadataFactory
 	targetEntityMappings:
-		App\Entities\Product\IProduct: App\Entities\Product\Nay
+		Pd\Entities\Order: App\Entities\Order
+		Pd\Entities\Item: App\Entities\Item
 
 
 

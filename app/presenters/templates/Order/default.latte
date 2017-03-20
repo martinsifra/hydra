@@ -1,0 +1,7 @@
+{block content}
+<h1>OrderPresenter</h1>
+
+{foreach $orders as $order}
+	{php dump($order)}
+	{php dump($order->items->toArray())}
+{/foreach}
