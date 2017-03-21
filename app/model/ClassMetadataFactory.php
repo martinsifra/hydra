@@ -42,18 +42,29 @@ final class ClassMetadataFactory extends Kdyby\Doctrine\Mapping\ClassMetadataFac
 			$class->setDiscriminatorColumn($parent->discriminatorColumn);
 			$class->setSubclasses($parent->subClasses + $class->subClasses);
 
-			if ($class->isInheritanceTypeSingleTable()) {
-				foreach ($class->fieldMappings as $field => $data) {
-					if (isset($data['inherited'])) {
-						unset($class->fieldMappings[$field]['inherited']);
+			array_walk($class->fieldMappings, function (&$mapping, $field) use ($class) {
+				if ($class->isInheritanceTypeNone()) {
+					if (isset($mapping['inherited'])) {
+						unset($mapping['inherited']);
+					}
+				} elseif ($class->isInheritanceTypeSingleTable()) {
+					if (isset($mapping['inherited'])) {
+						unset($mapping['inherited']);
 					}
 				}
-				foreach ($class->associationMappings as $field => $data) {
-					if (isset($data['inherited'])) {
-						unset($class->associationMappings[$field]['inherited']);
+			});
+
+			array_walk($class->associationMappings, function (&$mapping, $field) use ($class) {
+				if ($class->isInheritanceTypeNone()) {
+					if (isset($mapping['inherited'])) {
+						unset($mapping['inherited']);
+					}
+				} elseif ($class->isInheritanceTypeSingleTable()) {
+					if (isset($mapping['inherited'])) {
+						unset($mapping['inherited']);
 					}
 				}
-			}
+			});
 		}
 	}
 

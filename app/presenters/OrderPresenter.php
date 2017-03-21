@@ -16,6 +16,9 @@ class OrderPresenter extends BasePresenter
 
 	public function renderDefault()
 	{
+		bdump($this->em->getRepository(\Pd\Entities\Order::class)->find(1));
+
+
 		$orders = $this->em->getRepository(\Pd\Entities\Order::class)->findAll();
 
 		$this->getTemplate()->add('orders', $orders);
